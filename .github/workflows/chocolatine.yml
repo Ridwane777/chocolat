@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
-      - run: timeout 120 make || { echo "Erreur de compilation"; exit 1; }
+      - run: make || { echo "Erreur de compilation"; exit 1; }
       - run: make clean
 
   run_tests:
@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
-      - run: timeout 120 make tests_run || { echo "Echec des tests"; exit 1; }
+      - run: make tests_run || { echo "Echec des tests"; exit 1; }
       - run: make clean
 
   mirroir:
