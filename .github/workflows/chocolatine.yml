@@ -17,6 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: check.sh $(pwd) $(pwd)
+      - run: |
+          if [ -s coding-style-reports.log ]; then
+            cat coding-style-reports.log
+            exit 1
+          fi
 
   check_compilation:
     needs: check_coding_style
@@ -27,6 +32,13 @@ jobs:
       - uses: actions/checkout@v4
       - run: make || { echo "Erreur de compilation"; exit 1; }
       - run: make clean
+      - run: |
+          for exe in $(echo $EXECUTABLES | tr "," " "); do
+            if [ ! -x "$exe" ]; then
+              echo "Binaire invalide"
+              exit 1;
+            fi
+          done
 
   run_tests:
     needs: check_compilation
@@ -36,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: make tests_run || { echo "Echec des tests"; exit 1; }
-      - run: make clean
+      - run: make fclean
 
   mirroir:
     needs: run_tests
@@ -45,8 +57,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: pixta-dev/repository-mirroring-action@v1
       with:
-        target_repo_url:
-          https://github.com/EpitechPGEPromo2029/B-DOP-200-COT-2-1-chocolatine-ridwane.nico.git
+        target_repo_url: 
         ssh_private_key:
           ${{ secrets.GIT_SSH_PRIVATE_KEY }}
   
