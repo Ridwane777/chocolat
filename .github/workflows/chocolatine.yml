@@ -8,7 +8,7 @@ on:
       - " ga-ignore-*"
 env:
    MIRROR_URL: https://github.com/EpitechPGEPromo2029/B-DOP-200-COT-2-1-chocolatine-ridwane.nico.git
-   EXECUTABLES: 105demography
+   EXECUTABLES: crocus
 
 jobs:
   check_coding_style:
