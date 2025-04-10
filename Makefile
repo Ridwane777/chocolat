@@ -20,7 +20,7 @@ all:	105demography
 	gcc -o 105demography C_files/*.c -lm -g3
 
 clean:
-	rm -f 105demography
+	rm -f *.o
 
 fclean: clean
 
