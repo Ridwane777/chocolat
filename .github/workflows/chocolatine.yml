@@ -31,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: make || { echo "Erreur de compilation"; exit 1; }
+      - run: make clean
       - run: |
           for exe in $(echo $EXECUTABLES | tr "," " "); do
             if [ ! -x "$exe" ]; then
@@ -38,7 +39,6 @@ jobs:
               exit 1;
             fi
           done
-      - run: make clean
 
   run_tests:
     needs: check_program_compilation
