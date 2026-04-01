@@ -1,49 +1,33 @@
 ##
 ## EPITECH PROJECT, 2024
-## my_top.c
+## Makefile
 ## File description:
-## makefile
+## Makefile
 ##
 
-SRC	=	src/*.c	\
-		command_files/*.c
+UNIT = --coverage -lcriterion -L./ -lm
 
-BIN 	=	crocus
+TEST = C_files/my_strlen.c	\
+	C_files/my_str_to_word_array.c	\
+	C_files/my_strncpy.c	\
+	C_files/spe_str_to_word_array.c	\
+	C_files/usage.c	\
+	C_files/additionnal_functions.c
 
-TESTS_FILES =	command_files/*.c\
-	src/print_value.c\
-	src/print_value2.c\
-	src/print_value3.c\
+all:	105demography
 
-TESTS =	tests/*.c
-
-$(BIN):	$(SRC)
-	gcc -o $(BIN) $(SRC) -g3
-
-all:	$(BIN)
+105demography:	C_files/*.c
+	gcc -o 105demography C_files/*.c -lm -g3
 
 clean:
-	rm -f $(BIN)
+	rm -f 105demography
 
-unit_tests:
-	gcc -o unit_tests $(TESTS) $(TESTS_FILES) -lcriterion --coverage
-
-tests_run: unit_tests
-	./unit_tests --verbose
-
-fclean:	clean
-	rm -f *~
-	rm -f *#
-	rm -f include/*~
-	rm -f include/*#
-	rm -f command_files/*~
-	rm -f command_files/*#
-	rm -f tests/*~
-	rm -f tests/*#
-	rm -f src/*~
-	rm -f src/*#
-	rm -f *.gcno
-	rm -f *.gcda
-	rm -f unit_tests
+fclean: clean
 
 re:	fclean all
+
+unit_tests: fclean all
+	gcc -o unit_test $(TEST)  tests/test_105demography.c $(UNIT)
+
+tests_run: unit_tests
+		./unit_test
