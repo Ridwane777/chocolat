@@ -1,0 +1,9 @@
+{
+  "name": "chocolat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ajouté pour tester le widget d'alertes de sécurité GitHub du dashboard TEK3 — dépendance volontairement obsolète (CVE connue) pour générer une vraie alerte Dependabot.",
+  "dependencies": {
+    "lodash": "4.17.4"
+  }
+}
